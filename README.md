@@ -1,30 +1,8 @@
-# 🚀 Welcome to Project & Portfolio!
-
-This repository will be used to keep track of research and development conducted in this class. Follow the instructions below to get started.
-cos
-### Getting Started
-
-**1.** Review the [About](./docs/01_about/README.md) README and all of the links it provides.
-
-**2.** Review the documentation and [Getting Started](./docs/02_getting_started/README.md) steps in this repository's docs folder.
-
-**3.** Attend the first Live Lecture to see a live setup demo. If you are unable to attend, make sure to watch the archive.
-
-### Next Steps...
-
-After completing the above steps, feel free to begin updating this readme where indicated below. Remember to update this document each week to receive proper credit for the weekly Milestone assignment.
-
-<br>
-
-> ❗️ &nbsp; Now that you have read to this point, go ahead and delete this sentence and everything above it.
-
-<br>
-
 # Project & Portfolio 1
 
 ### Student First & Last Name
 
-Hello my name is [enter name]. I am a student from [where are you from?]. The purpose of this repository is to practice development using version control. This work will help me begin to build a portfolio of skills and accomplishment that can be shared in the future.
+Hello my name is Andrew Machnik. I am a student from Golden, CO. The purpose of this repository is to practice development using version control. This work will help me begin to build a portfolio of skills and accomplishment that can be shared in the future.
 
 <br>
 
@@ -33,18 +11,19 @@ Hello my name is [enter name]. I am a student from [where are you from?]. The pu
 Each week I will summarize my milestone activity and progress by writing a stand-up. A stand-up is meant to be a succinct update on how things are going. Use these prompts as a guide on what to write about:
 
 ⚙️ Overview - What I worked on this past week
-<br>
-🌵 Challenges - What problems did I have & how I'm addressing them
-<br>
-🏆 Accomplishments - What is something I "leveled up" on this week
-<br>
-🔮 Next Steps - What I plan to prioritize and do next
 
-<br>
+🌵 Challenges - What problems did I have & how I'm addressing them
+
+🏆 Accomplishments - What is something I "leveled up" on this week
+
+🔮 Next Steps - What I plan to prioritize and do next
 
 ### Week 1
 
-Replace this paragraph with your stand up for this week. Use the prompts above to summarize your most recent milestone activity and work.
+Overview: I began working on a turn-based civilization simulation game. I wanted to create some sort of Age of Empires meets Civilization meets Godus with some generic builder feels in there. I created the initial World and Tile classes so far. 
+Challenges: I am using Obsidian for the first time, and I am using a lot more of GitHub than ever before.
+Accomplishments: I added the initial class structures and committed / pushed both to the newly created repo.
+Next Steps: Next, I plan to create randomized terrain tile generation, a main menu, and hopefully the rest of the game.
 
 ### Week 2
 
