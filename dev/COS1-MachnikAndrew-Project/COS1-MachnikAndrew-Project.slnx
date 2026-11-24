@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="COS1-MachnikAndrew-Project/COS1-MachnikAndrew-Project.vcxproj" />
+</Solution>
