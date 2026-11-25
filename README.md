@@ -20,10 +20,21 @@ Each week I will summarize my milestone activity and progress by writing a stand
 
 ### Week 1
 
+11/23/26
 Overview: I began working on a turn-based civilization simulation game. I wanted to create some sort of Age of Empires meets Civilization meets Godus with some generic builder feels in there. I created the initial World and Tile classes so far. 
 Challenges: I am using Obsidian for the first time, and I am using a lot more of GitHub than ever before.
 Accomplishments: I added the initial class structures and committed / pushed both to the newly created repo.
 Next Steps: Next, I plan to create randomized terrain tile generation, a main menu, and hopefully the rest of the game.
+
+11/24/26
+Overview: Continued work on my simulation project. Added lots to make the game work smoothly.
+Challenges: AdvanceTurn mechanic was tricky
+Accomplishments:
+Added random terrain generation
+Created Game class
+Added Main Menu
+Added Turns - with counter
+Next Steps: Make the world look better... add the Civilization class. Figure out population and resources.
 
 ### Week 2
 

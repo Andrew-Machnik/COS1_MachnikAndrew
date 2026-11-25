@@ -1,13 +1,10 @@
-#include "World.h"
-#include <iostream>
+#include "Game.h"
 
 int main()
 {
-	World world(12, 8);
+	Game game;
 
-	world.Generate();
-	
-	world.Display();
+	game.Run();
 
 	return 0;
 }
