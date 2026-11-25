@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 
+// Initialize world dimentions
 World::World(int worldWidth, int worldHeight)
 {
 	width = worldWidth;
@@ -10,6 +11,7 @@ World::World(int worldWidth, int worldHeight)
 	tiles.resize(width * height);
 }
 
+// Display world grid
 void World::Display() const
 {
 	for (int y = 0; y < height; y++)
@@ -26,6 +28,7 @@ void World::Display() const
 	}
 }
 
+// Generate random terrain
 void World::Generate()
 {
 	std::random_device rd;
@@ -56,4 +59,20 @@ void World::Generate()
 			break;
 		}
 	}
+}
+
+// Count terrain tiles
+int World::CountTerrain(Terrain terrain) const
+{
+	int count = 0;
+
+	for (const Tile& tile : tiles)
+	{
+		if (tile.GetTerrain() == terrain)
+		{
+			count++;
+		}
+	}
+
+	return count;
 }

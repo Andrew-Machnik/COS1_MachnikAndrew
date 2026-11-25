@@ -1,7 +1,9 @@
 #pragma once
 
 #include "World.h"
+#include "Civilization.h"
 
+// Available game states
 enum class GameState
 {
 	MainMenu,
@@ -9,10 +11,13 @@ enum class GameState
 	Exit
 };
 
+// Game Class
 class Game
 {
+// Game functions
 private:
 	World world;
+	Civilization civilization;
 	GameState state;
 	int turn;
 

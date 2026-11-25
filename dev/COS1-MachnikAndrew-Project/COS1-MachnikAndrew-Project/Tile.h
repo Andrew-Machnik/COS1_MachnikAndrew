@@ -1,5 +1,7 @@
 #pragma once
+#include <string>
 
+// Terrain types
 enum class Terrain
 {
 	Grassland,
@@ -8,6 +10,7 @@ enum class Terrain
 	Mountain
 };
 
+// Tile Class
 class Tile
 {
 private:
@@ -19,5 +22,5 @@ public:
 	Terrain GetTerrain() const;
 	void SetTerrain(Terrain newTerrain);
 
-	char GetSymbol() const;
+	std::string GetSymbol() const;
 };

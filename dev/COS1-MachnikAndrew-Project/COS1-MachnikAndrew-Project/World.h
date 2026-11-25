@@ -3,12 +3,14 @@
 #include "Tile.h"
 #include <vector>
 
+// World Class
 class World
 {
 private:
 	int width;
 	int height;
 
+	// Store world tiles
 	std::vector<Tile> tiles;
 
 public:
@@ -17,4 +19,6 @@ public:
 	void Display() const;
 
 	void Generate();
+
+	int CountTerrain(Terrain terrain) const;
 };

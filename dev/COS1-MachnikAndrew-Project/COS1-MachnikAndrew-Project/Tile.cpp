@@ -1,10 +1,13 @@
 #include "Tile.h"
+#include <string>
 
+// Initialize terrain tile
 Tile::Tile()
 {
 	terrain = Terrain::Grassland;
 }
 
+// Return terrain type
 Terrain Tile::GetTerrain() const
 {
 	return terrain;
@@ -15,23 +18,23 @@ void Tile::SetTerrain(Terrain newTerrain)
 	terrain = newTerrain;
 }
 
-char Tile::GetSymbol() const
+std::string Tile::GetSymbol() const
 {
 	switch (terrain)
 	{
 	case Terrain::Grassland:
-		return '.';
+		return "__";
 
 	case Terrain::Forest:
-		return 'F';
+		return "||";
 
 	case Terrain::Water:
-		return '~';
+		return "~~";
 
 	case Terrain::Mountain:
-		return 'M';
+		return "^^";
 
 	default:
-		return '?';
+		return "??";
 	}
 }

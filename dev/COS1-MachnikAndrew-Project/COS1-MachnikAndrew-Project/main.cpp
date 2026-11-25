@@ -1,5 +1,6 @@
 #include "Game.h"
 
+// Start game
 int main()
 {
 	Game game;

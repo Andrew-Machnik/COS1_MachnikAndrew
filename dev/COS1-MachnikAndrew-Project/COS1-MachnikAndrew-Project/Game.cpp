@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 
+// Initialize game settings
 Game::Game()
 	: world(12, 8),
 	state(GameState::MainMenu),
@@ -10,6 +11,7 @@ Game::Game()
 {
 }
 
+// Main game loop
 void Game::Run()
 {
 	while (state != GameState::Exit)
@@ -32,6 +34,7 @@ void Game::Run()
 	std::cout << "\nThanks for playing!\n";
 }
 
+// Display main menu
 void Game::ShowMainMenu()
 {
 	std::cout << "\n============================\n";
@@ -55,9 +58,11 @@ void Game::ShowMainMenu()
 	}
 }
 
+// Generate world | reset game data
 void Game::StartNewGame()
 {
 	world.Generate();
+	civilization.Reset();
 
 	turn = 1;
 	state = GameState::Playing;
@@ -65,6 +70,7 @@ void Game::StartNewGame()
 	std::cout << "\nA new world has been created.\n";
 }
 
+// Display world | stats | player options
 void Game::ShowGameMenu()
 {
 	std::cout << "\n============================\n";
@@ -72,6 +78,7 @@ void Game::ShowGameMenu()
 	std::cout << "============================\n";
 
 	world.Display();
+	civilization.Display();
 
 	std::cout << "\n1. Advance Turn\n";
 	std::cout << "0. Return to Main Menu\n";
@@ -90,13 +97,16 @@ void Game::ShowGameMenu()
 	}
 }
 
+// Advance time | update civilization
 void Game::AdvanceTurn()
 {
 	++turn;
+	civilization.Update(world);
 
 	std::cout << "\nTime has advanced.\n";
 }
 
+// Validate player input
 int Game::GetMenuChoice(int minimum, int maximum)
 {
 	std::string input;
@@ -115,6 +125,7 @@ int Game::GetMenuChoice(int minimum, int maximum)
 
 		std::istringstream stream(input);
 
+		// Check input | validate range
 		if (stream >> choice &&
 			!(stream >> extra) &&
 			choice >= minimum &&
