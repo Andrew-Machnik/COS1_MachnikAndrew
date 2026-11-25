@@ -15,4 +15,6 @@ public:
 	World(int worldWidth, int worldHeight);
 
 	void Display() const;
+
+	void Generate();
 };

@@ -1,10 +1,10 @@
 # Project & Portfolio 1
 
-### Student First & Last Name
+Andrew Machnik
 
 Hello my name is Andrew Machnik. I am a student from Golden, CO. The purpose of this repository is to practice development using version control. This work will help me begin to build a portfolio of skills and accomplishment that can be shared in the future.
 
-<br>
+
 
 ## 📢 &nbsp; Weekly Stand Up
 

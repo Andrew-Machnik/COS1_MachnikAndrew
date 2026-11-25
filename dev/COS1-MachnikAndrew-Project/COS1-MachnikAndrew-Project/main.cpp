@@ -5,10 +5,8 @@ int main()
 {
 	World world(12, 8);
 
-	std::cout << "========================\n";
-	std::cout << "         WORLD\n";
-	std::cout << "========================\n\n";
-
+	world.Generate();
+	
 	world.Display();
 
 	return 0;
