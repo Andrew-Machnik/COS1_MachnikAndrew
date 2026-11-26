@@ -29,35 +29,102 @@ void World::Display() const
 	}
 }
 
-// Generate random terrain
+// Generate connected terrain regions
 void World::Generate()
 {
 	std::random_device rd;
 	std::mt19937 generator(rd());
 
-	std::discrete_distribution<int> distribution(
-		{ 45, 30, 15, 10 }
-	);
+	// Random region positions
+	std::uniform_int_distribution<int> randomX(0, width - 1);
+	std::uniform_int_distribution<int> randomY(0, height - 1);
+	std::uniform_int_distribution<int> radius(1, 3);
 
+	// Initialize Grassland
 	for (Tile& tile : tiles)
 	{
-		switch (distribution(generator))
+		tile.SetTerrain(Terrain::Grassland);
+	}
+
+	// Determin number of regions
+	int regionCount = width * height / 60 + 1;
+	if (regionCount < 3)
+	{
+		regionCount = 3;
+	}
+
+	std::discrete_distribution<int> terrainType(
+		{ 50, 30, 20 }
+	);
+
+	// Generate terrain regions
+	for (int i = 0; i < regionCount; i++)
+	{
+		int centerX = randomX(generator);
+		int centerY = randomY(generator);
+		int regionRadius = radius(generator);
+
+		Terrain terrain;
+
+		switch (i < 3 ? i : terrainType(generator))
 		{
 		case 0:
-			tile.SetTerrain(Terrain::Grassland);
+			terrain = Terrain::Forest;
 			break;
 
 		case 1:
-			tile.SetTerrain(Terrain::Forest);
+			terrain = Terrain::Water;
 			break;
 
 		case 2:
-			tile.SetTerrain(Terrain::Water);
+			terrain = Terrain::Mountain;
 			break;
+		}
 
-		case 3:
-			tile.SetTerrain(Terrain::Mountain);
-			break;
+		// Fill surrounding area
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++)
+			{
+				int dx = x - centerX;
+				int dy = y - centerY;
+
+				if (dx * dx + dy * dy <=
+					regionRadius * regionRadius)
+				{
+					int index = y * width + x;
+
+					// Preserve existing terrain regions
+					if (tiles[index].GetTerrain() == Terrain::Grassland)
+					{
+						tiles[index].SetTerrain(terrain);
+					}
+				}
+			}
+		}
+	}
+
+	// Make all terrain types appear
+	Terrain requiredTerrain[] =
+	{
+		Terrain::Grassland,
+		Terrain::Forest,
+		Terrain::Water,
+		Terrain::Mountain
+	};
+
+	for (Terrain terrain : requiredTerrain)
+	{
+		if (CountTerrain(terrain) == 0)
+		{
+			for (Tile& tile : tiles)
+			{
+				if (CountTerrain(tile.GetTerrain()) > 1)
+				{
+					tile.SetTerrain(terrain);
+					break;
+				}
+			}
 		}
 	}
 }

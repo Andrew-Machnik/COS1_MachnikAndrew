@@ -47,6 +47,20 @@ Randomized resource production
 Added population status messages
 Next steps: Add world sizes, improve the terrain generation, and make the console app look better (easier to read)
 
+11/26:
+Overview: Working on world generation, resource management, and console appearance
+Challenges: Balancing resource production across world size.
+	Larger worlds produce too many resources
+		Wood and stone have no true purpose outside of consumption right now
+Accomplishments:
+Added selectable world sizes
+Improved terrain generation
+	Changed the look to colors
+	Added "grouped" regions
+Added population-based resource production limits
+Added wood and stone consumption
+Next steps: Improve console layout and readability, display resource changes between turns, and FIX THE RESOURCE BALANCING ISSUE
+
 ### Week 2
 
 My next stand up will go here...

@@ -40,12 +40,41 @@ void Civilization::Update(const World& world)
 	static std::mt19937 generator(rd());
 	std::uniform_int_distribution<int> harvest(50, 150);
 
-	food += (grassland / 4 + water / 3) * harvest(generator) / 100;
-	wood += (forest / 3) * harvest(generator) / 100;
-	stone += (mountain / 2) * harvest(generator) / 100;
+	// Population-based gathering limits
+	int foodLimit = population * 2;
+	int woodLimit = population / 2;
+	int stoneLimit = population / 3;
+
+	// Available resource production
+	int foodProduction = grassland / 4 + water / 3;
+	int woodProduction = forest / 3;
+	int stoneProduction = mountain / 2;
+
+	// Limit producion per population
+	if (foodProduction > foodLimit)
+		foodProduction = foodLimit;
+
+	if (woodProduction > woodLimit)
+		woodProduction = woodLimit;
+
+	if (stoneProduction > stoneLimit)
+		stoneProduction = stoneLimit;
+
+	// Random resource production
+	food += foodProduction * harvest(generator) / 100;
+	wood += woodProduction * harvest(generator) / 100;
+	stone += stoneProduction * harvest(generator) / 100;
 
 	// Resource consumption
 	food -= population;
+	wood -= population / 3;
+	stone -= population / 5;
+
+	if (wood < 0)
+		wood = 0;
+
+	if (stone < 0)
+		stone = 0;
 
 	// Population growth/decline
 	if (food < 0)
