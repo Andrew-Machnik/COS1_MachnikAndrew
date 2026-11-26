@@ -21,4 +21,6 @@ public:
 	void Generate();
 
 	int CountTerrain(Terrain terrain) const;
+
+	void Resize(int worldWidth, int worldHeight);
 };

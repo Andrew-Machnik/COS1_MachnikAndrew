@@ -58,9 +58,43 @@ void Game::ShowMainMenu()
 	}
 }
 
-// Generate world | reset game data
+// Select world size | generate world | reset game data
 void Game::StartNewGame()
 {
+	std::cout << "\n==============================\n";
+	std::cout << "       SELECT WORLD SIZE\n";
+	std::cout << "==============================\n";
+
+	std::cout << "1. Small (12 x 8)\n";
+	std::cout << "2. Medium (24 x 16)\n";
+	std::cout << "3. Large (36 x 24)\n";
+	std::cout << "4. Massive (48 x 32)\n";
+	std::cout << "0. Return to Main Menu\n";
+
+	int choice = GetMenuChoice(0, 4);
+
+	switch (choice)
+	{
+	case 1:
+		world.Resize(12, 8);
+		break;
+
+	case 2:
+		world.Resize(24, 16);
+		break;
+
+	case 3:
+		world.Resize(36, 24);
+		break;
+
+	case 4:
+		world.Resize(48, 32);
+		break;
+
+	default:
+		return;
+	}
+
 	world.Generate();
 	civilization.Reset();
 

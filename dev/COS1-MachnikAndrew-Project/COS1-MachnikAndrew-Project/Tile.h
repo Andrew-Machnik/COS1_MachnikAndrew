@@ -23,4 +23,5 @@ public:
 	void SetTerrain(Terrain newTerrain);
 
 	std::string GetSymbol() const;
+	std::string GetColor() const;
 };

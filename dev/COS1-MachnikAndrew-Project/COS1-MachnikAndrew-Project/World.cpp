@@ -20,8 +20,9 @@ void World::Display() const
 		{
 			int index = y * width + x;
 
-			std::cout << tiles[index].GetSymbol()
-				<< ' ';
+			std::cout << tiles[index].GetColor()
+				<< "  "
+				<< "\033[0m";
 		}
 
 		std::cout << '\n';
@@ -75,4 +76,14 @@ int World::CountTerrain(Terrain terrain) const
 	}
 
 	return count;
+}
+
+// Resize world
+void World::Resize(int worldWidth, int worldHeight)
+{
+	width = worldWidth;
+	height = worldHeight;
+
+	tiles.clear();
+	tiles.resize(width * height);
 }
