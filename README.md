@@ -61,15 +61,29 @@ Added population-based resource production limits
 Added wood and stone consumption
 Next steps: Improve console layout and readability, display resource changes between turns, and FIX THE RESOURCE BALANCING ISSUE
 
+11/26 (pt. 2)
 Overview: Tried to fix the resource balancing issues.
 Challenges: The resource balancing issues (while wood and stone have no real purpose). Still have excessive population and resource growth...
 Accomplishments:
 Added total tile calculations
 Added terrain density calculations
 Added dynamic resource scaling
-	Adjusted wood gathering effeciency
+	Adjusted wood gathering efficiency
 Added finite terrain production limits
 Next Steps: Improve console layout and readability, display resource changes between turns, FIX THE RESOURCE BALANCING (after resources are given a purpose), and add civilization development
+
+11/27
+Overview: Improved console layout, civilization statistics, turn events, and procedural world generation (improved current build)
+Challenges: Aligning the civilization stats, figuring out the random terrain creation equations, and resource balancing problem still remains
+Accomplishments:
+Improved console layout / readability
+Updated console to have sectional headings
+Added civilization stats,
+Updates for population and resources between turns
+Added turn event section
+	Population and resource updates
+Improved procedural terrain generation
+
 
 ### Week 2
 

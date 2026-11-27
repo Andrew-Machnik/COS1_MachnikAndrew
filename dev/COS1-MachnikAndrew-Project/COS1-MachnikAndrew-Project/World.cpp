@@ -39,6 +39,7 @@ void World::Generate()
 	std::uniform_int_distribution<int> randomX(0, width - 1);
 	std::uniform_int_distribution<int> randomY(0, height - 1);
 	std::uniform_int_distribution<int> radius(1, 3);
+	std::uniform_real_distribution<double> boundaryVariation(0.75, 1.25);
 
 	// Initialize Grassland
 	for (Tile& tile : tiles)
@@ -62,7 +63,8 @@ void World::Generate()
 	{
 		int centerX = randomX(generator);
 		int centerY = randomY(generator);
-		int regionRadius = radius(generator);
+		int radiusX = radius(generator);
+		int radiusY = radius(generator);
 
 		Terrain terrain;
 
@@ -86,11 +88,17 @@ void World::Generate()
 		{
 			for (int x = 0; x < width; x++)
 			{
-				int dx = x - centerX;
-				int dy = y - centerY;
+				// Calculate distance from region center
+				double dx = static_cast<double>(x - centerX);
+				double dy = static_cast<double>(y - centerY);
 
-				if (dx * dx + dy * dy <=
-					regionRadius * regionRadius)
+				// Calculate elliptical area
+				double distance =
+					(dx * dx) / (radiusX * radiusX) +
+					(dy * dy) / (radiusY * radiusY);
+
+				// Random terrain boundaries
+				if (distance<= boundaryVariation(generator))
 				{
 					int index = y * width + x;
 

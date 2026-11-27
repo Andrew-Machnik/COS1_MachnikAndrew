@@ -108,14 +108,21 @@ void Game::StartNewGame()
 // Display world | stats | player options
 void Game::ShowGameMenu()
 {
-	std::cout << "\n============================\n";
-	std::cout << "Turn: " << turn << '\n';
-	std::cout << "============================\n";
+	std::cout << "\n========================================\n";
+	std::cout << "              Turn: " << turn << '\n';
+	std::cout << "========================================\n";
 
+	std::cout << "\n--- WORLD MAP ---\n";
 	world.Display();
+
+	// Civilization stats
 	civilization.Display();
 
-	std::cout << "\n1. Advance Turn\n";
+	// Turn events
+	civilization.DisplayEvents();
+
+	std::cout << "\n--- PLAYER OPTIONS ---\n";
+	std::cout << "1. Advance Turn\n";
 	std::cout << "0. Return to Main Menu\n";
 
 	int choice = GetMenuChoice(0, 1);
@@ -137,8 +144,6 @@ void Game::AdvanceTurn()
 {
 	++turn;
 	civilization.Update(world);
-
-	std::cout << "\nTime has advanced.\n";
 }
 
 // Validate player input

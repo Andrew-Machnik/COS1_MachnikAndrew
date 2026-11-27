@@ -1,5 +1,6 @@
 #include "Civilization.h"
 #include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <random>
 
@@ -17,11 +18,29 @@ void Civilization::Reset()
 	food = 50;
 	wood = 20;
 	stone = 10;
+
+	// Initialize previous stats
+	previousPopulation = population;
+	previousFood = food;
+	previousWood = wood;
+	previousStone = stone;
+
+	// Reset turn events
+	turnEvents.clear();
 }
 
 // Update civilization each turn
 void Civilization::Update(const World& world)
 {
+	// Clear prior turn events
+	turnEvents.clear();
+
+	// Record previous turn stats
+	previousPopulation = population;
+	previousFood = food;
+	previousWood = wood;
+	previousStone = stone;
+
 	// Stop development if population = 0
 	if (population == 0)
 	{
@@ -125,29 +144,88 @@ void Civilization::Update(const World& world)
 		population -= decline;
 		food = 0;
 
-		std::cout << "Food shortage! Population declined by "
-			<< decline << ".\n";
+		turnEvents.push_back(
+			"Food shortage! Population decreased by "
+			+ std::to_string(decline) + ".");
 	}
 	else if (food >= population * 3)
 	{
 		int growth = population / 20 + 1;
 		population += growth;
 
-		std::cout << "Food surplus! Population increased by "
-			<< growth << ".\n";
+		turnEvents.push_back(
+			"Food surplus! Population increased by "
+			+ std::to_string(growth) + ".");
 	}
 	else
 	{
-		std::cout << "Population remains stable.\n";
+		turnEvents.push_back("Population remains stable.");
+	}
+
+	// Resource shortage events
+	if (food == 0)
+	{
+		turnEvents.push_back("Food reserves are depleted.");
+	}
+
+	if (wood == 0)
+	{
+		turnEvents.push_back("Wood reserves are depleted.");
+	}
+
+	if (stone == 0)
+	{
+		turnEvents.push_back("Stone reserves are depleted.");
 	}
 }
 
 // Display civilization stats
 void Civilization::Display() const
 {
-	std::cout << "\n--- Civilization ---\n";
-	std::cout << "Population: " << population << '\n';
-	std::cout << "Food: " << food << '\n';
-	std::cout << "Wood: " << wood << '\n';
-	std::cout << "Stone: " << stone << '\n';
+	// Calculate changes since last turn
+	int populationChange = population - previousPopulation;
+	int foodChange = food - previousFood;
+	int woodChange = wood - previousWood;
+	int stoneChange = stone - previousStone;
+
+	std::cout << "\n--- CIVILIZATION ---\n";
+	
+	std::cout << std::left << std::setw(15)
+		<< "Population:" << population
+		<< " (" << std::showpos << populationChange
+		<< std::noshowpos << ")\n";
+
+	std::cout << std::left << std::setw(15)
+		<< "Food:" << food
+		<< " (" << std::showpos << foodChange
+		<< std::noshowpos << ")\n";
+
+	std::cout << std::left << std::setw(15)
+		<< "Wood:" << wood
+		<< " (" << std::showpos << woodChange
+		<< std::noshowpos << ")\n";
+
+	std::cout << std::left << std::setw(15)
+		<< "Stone:" << stone
+		<< " (" << std::showpos << stoneChange
+		<< std::noshowpos << ")\n";
+
+	std::cout << std::right;
+}
+
+// Display turn events
+void Civilization::DisplayEvents() const
+{
+	std::cout << "\n--- TURN EVENTS ---\n";
+
+	if (turnEvents.empty())
+	{
+		std::cout << "No events this turn.\n";
+		return;
+	}
+
+	for (const std::string& event : turnEvents)
+	{
+		std::cout << "- " << event << '\n';
+	}
 }
