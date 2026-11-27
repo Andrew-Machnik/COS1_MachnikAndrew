@@ -145,6 +145,12 @@ int World::CountTerrain(Terrain terrain) const
 	return count;
 }
 
+// Calculate total world tiles
+int World::GetTotalTiles() const
+{
+	return width * height;
+}
+
 // Resize world
 void World::Resize(int worldWidth, int worldHeight)
 {

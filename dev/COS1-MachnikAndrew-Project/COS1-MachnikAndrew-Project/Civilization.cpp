@@ -35,6 +35,25 @@ void Civilization::Update(const World& world)
 	int water = world.CountTerrain(Terrain::Water);
 	int mountain = world.CountTerrain(Terrain::Mountain);
 
+	// Calculate terrain density
+	int totalTiles = world.GetTotalTiles();
+
+	if (totalTiles <= 0)
+		return;
+
+	double grasslandDensity = static_cast<double>(grassland) / totalTiles;
+	double forestDensity = static_cast<double>(forest) / totalTiles;
+	double waterDensity = static_cast<double>(water) / totalTiles;
+	double mountainDensity = static_cast<double>(mountain) / totalTiles;
+
+	/* TEST(terrain density)
+	std::cout << "\nTotal tiles: " << totalTiles << '\n';
+	std::cout << "Grassland: " << grasslandDensity * 100 << "%\n";
+	std::cout << "Forest: " << forestDensity * 100 << "%\n";
+	std::cout << "Water: " << waterDensity * 100 << "%\n";
+	std::cout << "Mountain: " << mountainDensity * 100 << "%\n";
+	*/
+
 	// Resource production
 	static std::random_device rd;
 	static std::mt19937 generator(rd());
@@ -45,10 +64,13 @@ void Civilization::Update(const World& world)
 	int woodLimit = population / 2;
 	int stoneLimit = population / 3;
 
-	// Available resource production
-	int foodProduction = grassland / 4 + water / 3;
-	int woodProduction = forest / 3;
-	int stoneProduction = mountain / 2;
+	// Density-based resource production
+	int foodProduction = static_cast<int>(
+		population * (grasslandDensity * 2.0 + waterDensity * 3.0));
+	int woodProduction = static_cast<int>(
+		population * forestDensity * 4.0);
+	int stoneProduction = static_cast<int>(
+		population * mountainDensity * 5.0);
 
 	// Limit producion per population
 	if (foodProduction > foodLimit)
@@ -60,10 +82,30 @@ void Civilization::Update(const World& world)
 	if (stoneProduction > stoneLimit)
 		stoneProduction = stoneLimit;
 
+	// Terrain-based production limits
+	int foodTerrainLimit = grassland * 2 + water * 3;
+	int woodTerrainLimit = forest * 4;
+	int stoneTerrainLimit = mountain * 5;
+
 	// Random resource production
-	food += foodProduction * harvest(generator) / 100;
-	wood += woodProduction * harvest(generator) / 100;
-	stone += stoneProduction * harvest(generator) / 100;
+	foodProduction = foodProduction + harvest(generator) / 100;
+	woodProduction = woodProduction + harvest(generator) / 100;
+	stoneProduction = stoneProduction + harvest(generator) / 100;
+
+	// Limit production per terrain
+	if (foodProduction > foodTerrainLimit)
+		foodProduction = foodTerrainLimit;
+
+	if (woodProduction > woodTerrainLimit)
+		woodProduction = woodTerrainLimit;
+
+	if (stoneProduction > stoneTerrainLimit)
+		stoneProduction = stoneTerrainLimit;
+
+	// Gathered resources
+	food += foodProduction;
+	wood += woodProduction;
+	stone += stoneProduction;
 
 	// Resource consumption
 	food -= population;

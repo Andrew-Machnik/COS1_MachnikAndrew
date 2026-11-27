@@ -22,5 +22,7 @@ public:
 
 	int CountTerrain(Terrain terrain) const;
 
+	int GetTotalTiles() const;
+
 	void Resize(int worldWidth, int worldHeight);
 };
